@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.fintrak.userservice.dto.LoginRequest;
+import com.fintrak.userservice.dto.LoginResponse;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -18,6 +20,12 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody RegistrationRequest request) {
         userService.registerUser(request);
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) {
+        String token = userService.login(request);
+        return ResponseEntity.ok(new LoginResponse(token));
     }
 
     @GetMapping("/health")
