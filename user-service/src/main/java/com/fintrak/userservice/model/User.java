@@ -1,6 +1,4 @@
-package com.fintrak.user_service.model;
-
-//package com.fintrak.userservice.model;
+package com.fintrak.userservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

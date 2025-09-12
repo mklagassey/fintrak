@@ -1,4 +1,4 @@
-package com.fintrak.user_service;
+package com.fintrak.userservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
