@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.fintrak.userservice.dto.LoginRequest;
 import com.fintrak.userservice.dto.LoginResponse;
+import com.fintrak.userservice.model.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -26,6 +29,13 @@ public class UserController {
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) {
         String token = userService.login(request);
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<User> getUserProfile(@AuthenticationPrincipal User user) {
+        // The 'user' object is automatically populated by Spring Security
+        // based on the validated JWT.
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/health")
