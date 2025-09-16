@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.UUID;
 
 @Service
 public class JwtService {
@@ -29,7 +28,7 @@ public class JwtService {
         SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
-                .subject(user.getId().toString())
+                .subject(user.getUsername())
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .signWith(key)
@@ -44,19 +43,18 @@ public class JwtService {
         return Jwts.parser().verifyWith(getSigningKey()).build();
     }
 
-    public boolean isTokenValid(String token) {
+    public boolean isTokenValid(String token, String username) {
         try {
             Jws<Claims> claims = getJwtParser().parseSignedClaims(token);
-            return !claims.getPayload().getExpiration().before(new Date());
+            final String tokenUsername = extractUsername(token);
+            return (tokenUsername.equals(username) && !claims.getPayload().getExpiration().before(new Date()));
         } catch (Exception e) {
-            // Token is invalid for any reason (expired, malformed, etc.)
             return false;
         }
     }
 
-    public UUID extractUserId(String token) {
+    public String extractUsername(String token) {
         Jws<Claims> claims = getJwtParser().parseSignedClaims(token);
-        String userIdStr = claims.getPayload().getSubject();
-        return UUID.fromString(userIdStr);
+        return claims.getPayload().getSubject();
     }
 }
