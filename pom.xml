@@ -79,6 +79,12 @@
                 <artifactId>mockito-inline</artifactId>
                 <version>5.2.0</version> <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>5.5.1</version> <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
