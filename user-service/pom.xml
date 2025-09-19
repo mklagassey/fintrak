@@ -80,6 +80,16 @@
 			<version>0.12.6</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
+			<version>7.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter-secretmanager</artifactId>
+			<version>7.3.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
