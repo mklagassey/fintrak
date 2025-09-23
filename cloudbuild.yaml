@@ -1,5 +1,7 @@
 steps:
+  # Step 1: Build the user-service image
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-user-service'
     args:
       - 'build'
       - '-t'
@@ -7,8 +9,20 @@ steps:
       - '.'
     dir: 'user-service'
 
+  # Step 2: Build the api-gateway image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-api-gateway'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/api-gateway:latest'
+      - '.'
+    dir: 'api-gateway'
+
+# List both images to be pushed to Artifact Registry
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/user-service:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/api-gateway:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
