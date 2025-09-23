@@ -14,3 +14,7 @@ spring:
           uri: https://user-service-69216980478.us-central1.run.app
           predicates:
             - Path=/api/v1/users/**
+
+eureka:
+  client:
+    enabled: false
