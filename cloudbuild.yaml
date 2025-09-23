@@ -1,28 +1,35 @@
 steps:
-  # Step 1: Build the user-service image
+  # Step 1: Run the main Maven build from the root directory.
+  # This builds all modules and makes the JAR files available.
+  - name: 'maven:3.9-eclipse-temurin-21'
+    id: 'build-all-modules'
+    entrypoint: 'mvn'
+    args: ['clean', 'install', '-DskipTests']
+
+  # Step 2: Build the user-service Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    id: 'build-user-service'
+    id: 'build-user-service-image'
     args:
       - 'build'
       - '-t'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/user-service:latest'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrak-repo/user-service:latest'
       - '.'
     dir: 'user-service'
 
-  # Step 2: Build the api-gateway image
+  # Step 3: Build the api-gateway Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    id: 'build-api-gateway'
+    id: 'build-api-gateway-image'
     args:
       - 'build'
       - '-t'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/api-gateway:latest'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrak-repo/api-gateway:latest'
       - '.'
     dir: 'api-gateway'
 
 # List both images to be pushed to Artifact Registry
 images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/user-service:latest'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/api-gateway:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrak-repo/user-service:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrak-repo/api-gateway:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
