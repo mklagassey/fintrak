@@ -13,7 +13,8 @@
     <groupId>com.fintrak</groupId>
     <artifactId>fintrak-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging> <name>fintrak</name>
+    <packaging>pom</packaging>
+    <name>fintrak</name>
     <description>A Modern Financial Tracker</description>
 
     <properties>
@@ -22,7 +23,7 @@
         <spring-cloud-gcp.version>5.2.1</spring-cloud-gcp.version>
     </properties>
 
-    <repositories>
+<repositories>
     <repository>
         <id>spring-milestones</id>
         <name>Spring Milestones</name>
@@ -60,7 +61,7 @@
     </pluginRepository>
 </pluginRepositories>
 
-    <modules>
+<modules>
     <module>user-service</module>
     <module>finance-service</module>
     <module>market-data-service</module>
@@ -76,18 +77,49 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-inline</artifactId>
                 <version>5.2.0</version> <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.google.cloud</groupId>
                 <artifactId>spring-cloud-gcp-dependencies</artifactId>
-                <version>5.5.1</version> <type>pom</type>
+                <version>${spring-cloud-gcp.version}</version>
+                <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.32</version>
+                <optional>true</optional>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>1.18.32</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
