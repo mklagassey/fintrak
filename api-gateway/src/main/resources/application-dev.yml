@@ -1,0 +1,22 @@
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
+      # CORRECTED aroutes section
+      routes:
+        - id: user-service-route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/users/**
+
+eureka:
+  client:
+    enabled: false

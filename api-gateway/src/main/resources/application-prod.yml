@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "https://fintrak-472601.web.app" # e.g., https://fintrak-472601.web.app
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
+      routes:
+        - id: user-service-route
+          uri: https://user-service-69216980478.us-central1.run.app
+          predicates:
+            - Path=/api/v1/users/**
