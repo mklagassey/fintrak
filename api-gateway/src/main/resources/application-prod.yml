@@ -8,6 +8,9 @@ spring:
             allowedMethods:
               - GET
               - POST
+              - PUT
+              - DELETE
+              - OPTIONS # Add this line
             allowedHeaders: "*"
       routes:
         - id: user-service-route
