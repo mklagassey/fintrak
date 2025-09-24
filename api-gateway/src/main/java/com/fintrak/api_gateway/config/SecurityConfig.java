@@ -16,6 +16,8 @@ public class SecurityConfig {
         http
                 // Disable CSRF protection, as it's not needed for stateless APIs
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
 
                 .authorizeExchange(exchange -> exchange
                         // THIS IS THE FIX: Permit all OPTIONS requests for CORS preflight
