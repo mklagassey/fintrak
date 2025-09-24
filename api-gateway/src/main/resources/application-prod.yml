@@ -19,9 +19,6 @@ spring:
           uri: https://user-service-69216980478.us-central1.run.app
           predicates:
             - Path=/api/v1/users/**
-          metadata:
-            cors:
-              allowedOrigins: "https://fintrak-472601.web.app"
 
 eureka:
   client:
