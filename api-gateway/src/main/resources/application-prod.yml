@@ -3,15 +3,17 @@ spring:
     gateway:
       globalcors:
         cors-configurations:
-          '[/**]':
-            allowedOrigins: "https://fintrak-472601.web.app" # e.g., https://fintrak-472601.web.app
+          '[/**]': # Apply to all paths
+            allowedOrigins:
+              - "https://fintrak-472601.web.app"
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
-              - OPTIONS # Add this line
+              - OPTIONS
             allowedHeaders: "*"
+            allowCredentials: true
       routes:
         - id: user-service-route
           uri: https://user-service-69216980478.us-central1.run.app
