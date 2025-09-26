@@ -4,3 +4,7 @@ server:
 spring:
   profiles:
     active: dev # Default to 'dev' for local runs
+
+jwt:
+  secret: ${JWT_SECRET:8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3}
+  expiration: 86400000
