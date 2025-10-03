@@ -25,10 +25,21 @@ steps:
       - '.'
     dir: 'api-gateway'
 
+  # Step 4: Build the finance-service Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-finance-service-image'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/finance-service:latest'
+      - '.'
+    dir: 'finance-service'
+
 # List both images to be pushed to Artifact Registry
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/user-service:latest' # Corrected name
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/api-gateway:latest' # Corrected name
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/fintrack-repo/finance-service:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
