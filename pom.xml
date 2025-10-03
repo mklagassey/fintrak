@@ -96,6 +96,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
+                <!-- Version is managed by Spring Boot, but defined here for clarity and to ensure consistency across tools -->
                 <version>1.18.32</version>
                 <optional>true</optional>
             </dependency>
